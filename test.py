@@ -29,8 +29,9 @@ class Minesweeper:
             self.images["numbers"].append(
                 PhotoImage(file="images/num{}_tile.png".format(str(i))))
 
-        # Setup size
+        # Setup size & mines
         self.size = 10
+        self.selected_mines = 10
         self.start()
 
     def start(self):
@@ -44,10 +45,58 @@ class Minesweeper:
                     self.grid[x] = {}
                 tile = {
                     "button": Button(self.frame,
-                                     image=self.images["tile"])
+                                     image=self.images["tile"]),
+                    "is_mine": False,
+                    "surrounding_mines": 0,
+                    "is_flagged": False,
+                    "is_clicked": False,
+                    "x": x,
+                    "y": y
                 }
                 tile["button"].grid(row=x, column=y)
                 self.grid[x][y] = tile
+
+        
+        self.mines = 0
+        while True:
+            self.create_mine()
+            if self.mines == self.selected_mines:
+                break
+        self.check_mines()
+        
+
+    def create_mine(self):
+        """ Create mines """
+        for x in self.grid:
+            for y in self.grid[x]:
+                if self.grid[x][y]["is_mine"] == True:
+                    continue
+                if randint(0, (self.size ** 2 + 1) //
+                           (self.selected_mines) + 1) == 0:
+                    self.grid[x][y]["is_mine"] = True
+                    self.grid[x][y]["button"].config(
+                        image=self.images["mine"])
+                    self.mines += 1
+                if self.mines == self.selected_mines:
+                    return
+
+    def check_mines(self):
+        """ Check surrounding mines """
+        for x in self.grid:
+            for y in self.grid[x]:
+                if self.grid[x][y]["is_mine"] == True:
+                    continue
+                for i in range(-1, 2):
+                    for j in range(-1, 2):
+                        if x + i < 0 or y + j < 0:
+                            continue
+                        if x + i > self.size - 1 or y + j > self.size - 1:
+                            continue
+                        if self.grid[x + i][y + j]["is_mine"] == True:
+                            self.grid[x][y]["surrounding_mines"] += 1
+                self.grid[x][y]["button"].config(
+                    image=self.images["numbers"]
+                    [self.grid[x][y]["surrounding_mines"]])
 
 
 if __name__ == "__main__":
