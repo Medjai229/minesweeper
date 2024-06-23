@@ -56,12 +56,15 @@ class Minesweeper:
                 tile["button"].grid(row=x, column=y)
                 self.grid[x][y] = tile
 
-        
+        # Create mines in the grid
         self.mines = 0
         while True:
+            # forever loop until the number is met
             self.create_mine()
             if self.mines == self.selected_mines:
                 break
+
+        # Check surrounding mines
         self.check_mines()
         
 
@@ -69,6 +72,9 @@ class Minesweeper:
         """ Create mines """
         for x in self.grid:
             for y in self.grid[x]:
+                # add here a condtion that the places where it is initially clicked
+                # doesn't have a mine and the same goes for its neighbors
+                # --------------------------------
                 if self.grid[x][y]["is_mine"] == True:
                     continue
                 if randint(0, (self.size ** 2 + 1) //
@@ -88,8 +94,10 @@ class Minesweeper:
                     continue
                 for i in range(-1, 2):
                     for j in range(-1, 2):
+                        # if out of boundries top and side
                         if x + i < 0 or y + j < 0:
                             continue
+                        # if out of boundries bot and side
                         if x + i > self.size - 1 or y + j > self.size - 1:
                             continue
                         if self.grid[x + i][y + j]["is_mine"] == True:
