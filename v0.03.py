@@ -66,16 +66,15 @@ class Minesweeper:
 
         # Check surrounding mines
         self.check_mines()
-        
 
     def create_mine(self):
         """ Create mines """
         for x in self.grid:
             for y in self.grid[x]:
-                # add here a condtion that the places where it is initially clicked
+                # add a condtion that the places where it is initially clicked
                 # doesn't have a mine and the same goes for its neighbors
                 # --------------------------------
-                if self.grid[x][y]["is_mine"] == True:
+                if self.grid[x][y]["is_mine"] is True:
                     continue
                 if randint(0, (self.size ** 2 + 1) //
                            (self.selected_mines) + 1) == 0:
@@ -90,7 +89,7 @@ class Minesweeper:
         """ Check surrounding mines """
         for x in self.grid:
             for y in self.grid[x]:
-                if self.grid[x][y]["is_mine"] == True:
+                if self.grid[x][y]["is_mine"] is True:
                     continue
                 for i in range(-1, 2):
                     for j in range(-1, 2):
@@ -100,7 +99,7 @@ class Minesweeper:
                         # if out of boundries bot and side
                         if x + i > self.size - 1 or y + j > self.size - 1:
                             continue
-                        if self.grid[x + i][y + j]["is_mine"] == True:
+                        if self.grid[x + i][y + j]["is_mine"] is True:
                             self.grid[x][y]["surrounding_mines"] += 1
                 self.grid[x][y]["button"].config(
                     image=self.images["numbers"]
