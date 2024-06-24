@@ -32,7 +32,7 @@ class Minesweeper:
         # Setup size & mines
         self.size = 10
         # Limit the mines so it doesn't glitch
-        self.selected_mines = min(self.size ** 2 - 9, 100)
+        self.selected_mines = min(self.size ** 2 - 9, 10)
         self.start()
 
     def start(self):
