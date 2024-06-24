@@ -122,14 +122,39 @@ class Minesweeper:
         """ Left click """
         if self.grid[x][y]["is_flagged"] == True:
             return
+
+        if self.grid[x][y]["is_clicked"] == True:
+            return
+
         elif self.grid[x][y]["is_mine"] == True:
             self.grid[x][y]["button"].config(
                 image=self.images["clicked_mine"])
+
+        elif self.grid[x][y]["surrounding_mines"] == 0:
+            self.grid[x][y]["button"].config(
+                image=self.images["numbers"][0])
+            self.grid[x][y]["is_clicked"] = True
+            self.clear_surr(x, y)
+
         else:
             self.grid[x][y]["button"].config(
                 image=self.images["numbers"]
                 [self.grid[x][y]["surrounding_mines"]])
             self.grid[x][y]["is_clicked"] = True
+
+
+    def clear_surr(self, x, y):
+        """ Clear surrounding tiles """
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                # if out of boundries top and side
+                if x + i < 0 or y + j < 0:
+                    continue
+                # if out of boundries bot and side
+                if x + i > self.size - 1 or y + j > self.size - 1:
+                    continue
+                #if self.grid[x + i][y + j]["surrounding_mines"] == 0:
+                self.left_click(x + i, y + j)
 
 
     def right_click(self, x, y):

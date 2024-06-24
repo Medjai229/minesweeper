@@ -53,7 +53,12 @@ class Minesweeper:
                     "x": x,
                     "y": y
                 }
+                tile["button"].bind("<Button-1>",
+                                    lambda Button, x=x, y=y: self.left_click(x, y))
+                tile["button"].bind("<Button-3>",
+                                    lambda Button, x=x, y=y: self.right_click(x, y))
                 tile["button"].grid(row=x, column=y)
+                self.tk.bind("r", lambda Res: self.restart())
                 self.grid[x][y] = tile
 
         # Create mines in the grid
@@ -68,23 +73,29 @@ class Minesweeper:
         self.check_mines()
         
 
+    def restart(self):
+        """ Restart the game """
+        self.start()
+
+
     def create_mine(self):
         """ Create mines """
         for x in self.grid:
             for y in self.grid[x]:
                 # add here a condtion that the places where it is initially clicked
                 # doesn't have a mine and the same goes for its neighbors
-                # --------------------------------
+                # ---------------------------------
                 if self.grid[x][y]["is_mine"] == True:
                     continue
                 if randint(0, (self.size ** 2 + 1) //
                            (self.selected_mines) + 1) == 0:
                     self.grid[x][y]["is_mine"] = True
-                    self.grid[x][y]["button"].config(
-                        image=self.images["mine"])
+                    #self.grid[x][y]["button"].config(
+                        #image=self.images["mine"])
                     self.mines += 1
                 if self.mines == self.selected_mines:
                     return
+
 
     def check_mines(self):
         """ Check surrounding mines """
@@ -102,9 +113,60 @@ class Minesweeper:
                             continue
                         if self.grid[x + i][y + j]["is_mine"] == True:
                             self.grid[x][y]["surrounding_mines"] += 1
-                self.grid[x][y]["button"].config(
-                    image=self.images["numbers"]
-                    [self.grid[x][y]["surrounding_mines"]])
+                #self.grid[x][y]["button"].config(
+                    #image=self.images["numbers"]
+                    #[self.grid[x][y]["surrounding_mines"]])
+
+
+    def left_click(self, x, y):
+        """ Left click """
+        if self.grid[x][y]["is_flagged"] == True:
+            return
+
+        if self.grid[x][y]["is_clicked"] == True:
+            return
+
+        elif self.grid[x][y]["is_mine"] == True:
+            self.grid[x][y]["button"].config(
+                image=self.images["clicked_mine"])
+
+        elif self.grid[x][y]["surrounding_mines"] == 0:
+            self.grid[x][y]["button"].config(
+                image=self.images["numbers"][0])
+            self.grid[x][y]["is_clicked"] = True
+            self.clear_surr(x, y)
+
+        else:
+            self.grid[x][y]["button"].config(
+                image=self.images["numbers"]
+                [self.grid[x][y]["surrounding_mines"]])
+            self.grid[x][y]["is_clicked"] = True
+
+
+    def clear_surr(self, x, y):
+        """ Clear surrounding tiles """
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                # if out of boundries top and side
+                if x + i < 0 or y + j < 0:
+                    continue
+                # if out of boundries bot and side
+                if x + i > self.size - 1 or y + j > self.size - 1:
+                    continue
+                #if self.grid[x + i][y + j]["surrounding_mines"] == 0:
+                self.left_click(x + i, y + j)
+
+
+    def right_click(self, x, y):
+        """ Right click """
+        if self.grid[x][y]["is_clicked"] == True:
+            return
+        if self.grid[x][y]["is_flagged"] == False:
+            self.grid[x][y]["button"].config(image=self.images["flag"])
+            self.grid[x][y]["is_flagged"] = True
+        else:
+            self.grid[x][y]["button"].config(image=self.images["tile"])
+            self.grid[x][y]["is_flagged"] = False
 
 
 if __name__ == "__main__":
