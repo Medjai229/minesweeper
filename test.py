@@ -255,17 +255,33 @@ class Minesweeper:
         self.game_over_window.bind("r", lambda Res: self.restart())
         restart_button.pack(side=LEFT)
 
+        # Create a button to reload the game
+        reload_button = Button(button_frame,
+                             text="Reload", command=self.reload)
+        reload_button.pack(side=LEFT)
+
         # Create a button to quit the game
         quit_button = Button(button_frame,
                              text="Quit", command=self.tk.destroy)
-        quit_button.pack(side=RIGHT)
+        quit_button.pack(side=LEFT)
 
         # Set the focus to the game over window
         self.game_over_window.focus_set()
 
     def reload(self):
         """ Reload the same game """
-        pass
+        try:
+            self.game_over_window.destroy()
+        except Exception:
+            pass
+        self.clicks = 0
+        for x in self.grid:
+            for y in self.grid[x]:
+                self.grid[x][y]["button"].config(
+                                     image=self.images["tile"])
+                self.grid[x][y]["is_flagged"] = False
+                self.grid[x][y]["is_clicked"] = False
+        self.stop = False
 
 
 if __name__ == "__main__":
