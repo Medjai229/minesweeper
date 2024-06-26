@@ -14,7 +14,7 @@ class Minesweeper:
         self.tk = tk
         self.frame = Frame(self.tk)
         self.frame.pack()
-        
+
         # Setup size & mines
         self.size = 10
         # Limit the mines so it doesn't glitch
@@ -25,7 +25,8 @@ class Minesweeper:
         self.time_label.grid(row=0, column=0, columnspan=self.size, sticky=W)
 
         self.mine_label = Label(self.frame, text="Mines left:")
-        self.mine_label.grid(row=0, column=self.size - 4, columnspan=self.size, sticky=W)
+        self.mine_label.grid(row=0, column=self.size - 4,
+                             columnspan=self.size, sticky=W)
 
         # Setup iamges
         self.images = {
@@ -40,7 +41,6 @@ class Minesweeper:
             self.images["numbers"].append(
                 PhotoImage(file="images/num{}_tile.png".format(str(i))))
 
-        
         self.start()
 
     def start(self):
@@ -236,14 +236,14 @@ class Minesweeper:
             self.grid[x][y]["is_flagged"] = True
             self.flags += 1
             self.mine_label.config(text="Mines left: {}"
-                               .format(self.selected_mines - self.flags))
+                                   .format(self.selected_mines - self.flags))
 
         else:
             self.grid[x][y]["button"].config(image=self.images["tile"])
             self.grid[x][y]["is_flagged"] = False
             self.flags -= 1
             self.mine_label.config(text="Mines left: {}"
-                               .format(self.selected_mines - self.flags))
+                                   .format(self.selected_mines - self.flags))
 
     def game_over(self, result):
         """ Game over """
@@ -290,7 +290,7 @@ class Minesweeper:
 
         # Create a button to reload the game
         reload_button = Button(button_frame,
-                             text="Reload", command=self.reload)
+                               text="Reload", command=self.reload)
         reload_button.pack(side=LEFT)
 
         # Create a button to quit the game
@@ -327,6 +327,7 @@ class Minesweeper:
         self.time += 1
         self.time_label.config(text="Time: {}".format(self.time / 10))
         self.tiktok = self.tk.after(100, self.timer)
+
 
 if __name__ == "__main__":
     window = Tk()
