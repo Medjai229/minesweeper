@@ -12,6 +12,7 @@ Minesweeper is a classic puzzle game where players click on a grid of squares to
 * Use logic and deduction to identify mine locations.
 * Clear the grid without detonating a mine to win.
 * Use the "flag" button to mark squares as potential mines.
+* Each number represents how many mines surrounds the current tile
 
 ## Screenshot
 
