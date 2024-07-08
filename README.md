@@ -27,7 +27,6 @@ cd minesweeper
 python3 minesweeper.py
 
 2. Follow the instructions on the screen to play the game.
-3. To exit the game, press the "q" key.
 
 This will launch the Minesweeper game window. Click on the squares to start playing!
 
@@ -44,6 +43,14 @@ If you're still facing issues, feel free to open an issue on this repository, an
 * Clear the grid without detonating a mine to win.
 * Use the "flag" button to mark squares as potential mines.
 * Each number represents how many mines surrounds the current tile
+
+## Related Projects
+Windows xp: Minesweeper
+
+## More Information
+You can view our presentation on the project here
+
+[Presentation](https://docs.google.com/presentation/d/1M-_zE-52QRNP3FLlmjxzYQBR8J0EjYr8fLxBsdLsCoM/edit#slide=id.g2a7f00d7c01_0_2019)
 
 ## Screenshot
 
