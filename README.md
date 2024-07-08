@@ -6,6 +6,16 @@ This project is a graphical implementation of the classic Minesweeper game using
 
 Minesweeper is a classic puzzle game where players click on a grid of squares to uncover hidden mines. The goal is to clear the grid without detonating a mine, requiring strategy and attention to detail.
 
+## Introduction
+[Landing page](https://minesweeper.my.canva.site/)
+
+## Blog Post
+
+### Authors 
+[Malik Hussein](https://www.linkedin.com/in/malikhussein/)
+[Mohamed Marzouk](https://www.linkedin.com/in/mohamed-marzouk-38aa75286/)
+[Mahmoud Mohey Eldin](https://www.linkedin.com/in/moodyeg/)
+
 ## Installation and Running
 
 ### Prerequisites
