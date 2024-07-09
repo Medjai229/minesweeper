@@ -12,6 +12,8 @@ Minesweeper is a classic puzzle game where players click on a grid of squares to
 
 ## Blog Post
 
+[Our LinkedIn Blog Post](https://www.linkedin.com/posts/mohamed-marzouk-38aa75286_hello-i-am-mohamed-marzouk-me-and-my-friends-activity-7216468132134043648-SpO5?utm_source=share&utm_medium=member_desktop)
+
 ### Authors 
 
 [Malik Hussein](https://www.linkedin.com/in/malikhussein/)<br/>
