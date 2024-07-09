@@ -298,35 +298,6 @@ class Minesweeper:
             color = "red"
         # Change the text in the message box label
         self.message_label.config(text=title, fg=color)
-        """ self.game_over_window = Toplevel(self.tk)
-        self.game_over_window.title("Game Over")
-
-        # Create a label with the game over message
-        message_label = Label(self.game_over_window, text=title)
-        message_label.pack()
-
-        # Create a frame for the buttons
-        button_frame = Frame(self.game_over_window)
-        button_frame.pack()
-
-        # Create a button to restart the game
-        restart_button = Button(button_frame,
-                                text="Restart", command=self.restart)
-        self.game_over_window.bind("r", lambda Res: self.restart())
-        restart_button.pack(side=LEFT)
-
-        # Create a button to reload the game
-        reload_button = Button(button_frame,
-                             text="Reload", command=self.reload)
-        reload_button.pack(side=LEFT)
-
-        # Create a button to quit the game
-        quit_button = Button(button_frame,
-                             text="Quit", command=self.tk.destroy)
-        quit_button.pack(side=LEFT)
-
-        # Set the focus to the game over window
-        self.game_over_window.focus_set() """
 
     def reload(self):
         """ Reload the same game """
